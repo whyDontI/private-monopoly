@@ -298,3 +298,7 @@ body {
 .community-chest .instructions {
 	font-size: 8px;
 }
+
+.chance .drawing {
+    font-size: 90px;
+}

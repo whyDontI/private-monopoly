@@ -17,7 +17,7 @@ const Card = ({
       <div className="container">
         {color !== '' && (<div className={['color-bar', color].join(' ')}></div>)}
         <div className="name">{name}</div>
-        {(pricetext !== '') && (<div className="price">${pricetext}</div>)}
+        {(pricetext !== '') && (<div className="price">{pricetext}</div>)}
 
         <div className="playerContainer">
           {gameState.player1.playing && gameState.player1.currentIndex === index && (<div className="player1">player1</div>)}
