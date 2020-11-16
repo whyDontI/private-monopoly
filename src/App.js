@@ -17,7 +17,9 @@ function App() {
                 <div className='deck'></div>
               </div>
               <h1 className='game-title'>MONOPOLY</h1>
-              <Dice />
+              <div className='dice'>
+                <Dice />
+              </div>
               <div className='chance-deck'>
                 <h2 className='label'>Chance</h2>
                 <div className='deck'></div>
