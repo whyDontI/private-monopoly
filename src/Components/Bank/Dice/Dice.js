@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { GameContext } from '../../../contexts/context';
 
 import diceNumber1 from '../../../assets/Die_1.png';
@@ -7,7 +7,7 @@ import diceNumber3 from '../../../assets/Die_3.png';
 import diceNumber4 from '../../../assets/Die_4.png';
 import diceNumber5 from '../../../assets/Die_5.png';
 import diceNumber6 from '../../../assets/Die_6.png';
-import './Dice.css'
+import styles from './Dice.module.css'
 
 const Dice = () => {
   const { dispatch, gameState } = useContext(GameContext)
@@ -16,27 +16,27 @@ const Dice = () => {
     let result
     switch (value) {
       case (1):
-        result = (<img src={diceNumber1} alt="" className="" />)
+        result = (<img src={diceNumber1} alt="" />)
         break;
 
       case (2):
-        result = (<img src={diceNumber2} alt="" className="" />)
+        result = (<img src={diceNumber2} alt="" />)
         break;
 
       case (3):
-        result = (<img src={diceNumber3} alt="" className="" />)
+        result = (<img src={diceNumber3} alt="" />)
         break;
 
       case (4):
-        result = (<img src={diceNumber4} alt="" className="" />)
+        result = (<img src={diceNumber4} alt="" />)
         break;
 
       case (5):
-        result = (<img src={diceNumber5} alt="" className="" />)
+        result = (<img src={diceNumber5} alt="" />)
         break;
 
       case (6):
-        result = (<img src={diceNumber6} alt="" className="" />)
+        result = (<img src={diceNumber6} alt="" />)
         break;
 
       default:
@@ -57,7 +57,7 @@ const Dice = () => {
     const dice2 = gameState.dice2
 
     return (
-      <div className="dice">
+      <div className={styles.dice}>
         {randomDice(dice1)}
         {randomDice(dice2)}
       </div>
@@ -65,7 +65,7 @@ const Dice = () => {
   }
 
   return (
-    <div className="diceContainer">
+    <div className={styles.diceContainer}>
       {showDice()}
       <button onClick={handleRandomDice}>Roll Dice</button>
     </div>

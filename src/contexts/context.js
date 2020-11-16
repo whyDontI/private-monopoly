@@ -9,6 +9,25 @@ const GameContextProvider = (props) => {
       playing: true,
       name: '',
       balance: 1500,
+      turn: true,
+      propertyCounts: {
+        red: 0,
+        yellow: 0,
+        orange: 0,
+        pink: 0,
+        'light-blue': 0,
+        'dark-blue': 0,
+        railroads: 0,
+        utilities: 0
+      },
+      cardsPurchased: [],
+      currentIndex: 1,
+    },
+    player2: {
+      playing: true,
+      name: '',
+      balance: 1500,
+      turn: false,
       propertyCounts: {
         red: 0,
         yellow: 0,
@@ -22,27 +41,11 @@ const GameContextProvider = (props) => {
       cardsPurchased: [],
       currentIndex: 1,
     },
-    player2: {
-      playing: true,
-      name: '',
-      balance: 1500,
-      propertyCounts: {
-        red: 0,
-        yellow: 0,
-        orange: 0,
-        pink: 0,
-        lightBlue: 0,
-        darkBlue: 0,
-        railRoads: 0,
-        utilities: 0
-      },
-      cardsPurchased: [],
-      currentIndex: 13,
-    },
     player3: {
       playing: false,
       name: '',
       balance: 1500,
+      turn: false,
       propertyCounts: {
         red: 0,
         yellow: 0,
@@ -59,6 +62,7 @@ const GameContextProvider = (props) => {
     player4: {
       playing: false,
       name: '',
+      turn: false,
       balance: 1500,
       propertyCounts: {
         red: 0,
@@ -75,6 +79,7 @@ const GameContextProvider = (props) => {
     },
     dice1: 0,
     dice2: 0,
+    diceRolledFlag: true,
     currentPlayerNumber: 1,
     currentPlayerName: 'player1',
     numberOfPlayers: 2
