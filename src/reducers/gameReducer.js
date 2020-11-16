@@ -13,10 +13,16 @@ function startGame(state, game) {
 }
 
 function rollDice(state, game) {
+  let dice1 = Math.floor(Math.random() * 6) + 1
+  let dice2 = Math.floor(Math.random() * 6) + 1
   const newState = {
     ...state,
-    dice1: Math.floor(Math.random() * 6) + 1,
-    dice2: Math.floor(Math.random() * 6) + 1
+    dice1,
+    dice2,
+    [state.currentPlayerName]: {
+      ...state[state.currentPlayerName],
+      currentIndex: (state[state.currentPlayerName].currentIndex + dice1 + dice2) % 40
+    }
   }
   return newState
 }

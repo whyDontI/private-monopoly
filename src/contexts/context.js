@@ -6,7 +6,7 @@ export const GameContext = createContext();
 const GameContextProvider = (props) => {
   const [gameState, dispatch] = useReducer(GameReducer, {
     player1: {
-      playing: false,
+      playing: true,
       name: '',
       balance: 1500,
       propertyCounts: {
@@ -23,7 +23,7 @@ const GameContextProvider = (props) => {
       currentIndex: 1,
     },
     player2: {
-      playing: false,
+      playing: true,
       name: '',
       balance: 1500,
       propertyCounts: {
@@ -37,7 +37,7 @@ const GameContextProvider = (props) => {
         utilities: 0
       },
       cardsPurchased: [],
-      currentIndex: 1,
+      currentIndex: 13,
     },
     player3: {
       playing: false,
@@ -75,7 +75,8 @@ const GameContextProvider = (props) => {
     },
     dice1: 0,
     dice2: 0,
-    currentPlayer: 1,
+    currentPlayerNumber: 1,
+    currentPlayerName: 'player1',
     numberOfPlayers: 2
   });
 

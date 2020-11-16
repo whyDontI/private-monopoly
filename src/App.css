@@ -47,6 +47,22 @@ body {
 	font-size: 10px;
 }
 
+.player1 {
+	background-color: red;
+}
+
+.player2 {
+	background-color: yellow;
+}
+
+.player3 {
+	background-color: black;
+}
+
+.player4 {
+	background-color: green;
+}
+
 .light-blue {
 	background: #87ceeb;
 }

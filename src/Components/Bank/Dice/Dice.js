@@ -11,9 +11,6 @@ import './Dice.css'
 
 const Dice = () => {
   const { dispatch, gameState } = useContext(GameContext)
-  // const [state, setState] = useState({
-  //   showDice: false
-  // })
 
   const randomDice = (value) => {
     let result
