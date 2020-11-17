@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Aux from '../../../hoc/Aux/Aux';
 import { GameContext } from '../../../contexts/context';
 import Backdrop from '../Backdrop/Backdrop';
 
@@ -9,6 +10,12 @@ const Modal = ({
   show, modalClosed, cardData, type, children, index,
 }) => {
   const { gameState, dispatch } = useContext(GameContext);
+
+  let isCardPurchased = false;
+
+  const cardPurchasedByPlayerIndex = gameState.cardsPurchasedBy.findIndex(
+    (element) => element.cardIndex === index,
+  );
 
   const handleBuy = () => {
     const oldPlayerData = gameState[gameState.currentPlayerName];
@@ -31,6 +38,28 @@ const Modal = ({
     modalClosed();
   };
 
+  const payRent = () => {
+    const oldPlayerData = gameState[gameState.currentPlayerName];
+    const ownerName = gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer;
+    const ownerData = gameState[ownerName];
+    const gameData = {
+      [gameState.currentPlayerName]: {
+        ...oldPlayerData,
+        balance: oldPlayerData.balance - cardData.rent1,
+        turn: false,
+      },
+      [ownerName]: {
+        ...ownerData,
+        balance: ownerData.balance + cardData.rent1,
+      },
+    };
+    dispatch({
+      type: 'PAY_RENT',
+      game: gameData,
+    });
+    modalClosed();
+  };
+
   const handlePass = () => {
     const oldPlayerData = gameState[gameState.currentPlayerName];
     const gameData = {
@@ -46,19 +75,23 @@ const Modal = ({
     modalClosed();
   };
 
-  let buttonContent = '';
+  let modalContent = '';
 
   if (type === 'chance' || type === 'community') {
-    buttonContent = (
-      <button type="button" className="" onClick={handlePass}>
-        End Turn
-      </button>
+    modalContent = (
+      <Aux>
+        {children}
+        <button type="button" className="" onClick={handlePass}>
+          End Turn
+        </button>
+      </Aux>
     );
   } else {
-    buttonContent = (
-      <>
+    modalContent = (
+      <Aux>
+        {children}
         <h1>
-          {'$'}
+          $
           {cardData.price}
         </h1>
         <button type="button" className="" onClick={handleBuy}>
@@ -67,22 +100,34 @@ const Modal = ({
         <button type="button" className="" onClick={handlePass}>
           Pass
         </button>
-      </>
+      </Aux>
     );
   }
 
-  let isCardPurchased = false;
+  const receiverName = gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer;
 
-  const cardPurchasedByPlayer = gameState.cardsPurchasedBy.findIndex(
-    (element) => element.cardIndex === index,
-  );
-
-  if (cardPurchasedByPlayer !== -1) {
+  if (cardPurchasedByPlayerIndex !== -1 && receiverName !== gameState.currentPlayerName) {
     isCardPurchased = true;
   }
 
+  if (isCardPurchased) {
+    modalContent = (
+      <Aux>
+        {children}
+        <p>
+          you have to pay
+          {cardData.rent1}
+          {' '}
+          to
+          {gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer}
+        </p>
+        <button type="button" onClick={payRent}>Pay</button>
+      </Aux>
+    );
+  }
+
   return (
-    <>
+    <Aux>
       <Backdrop show={show} clicked={() => { }} />
       <div
         className="Modal"
@@ -91,10 +136,9 @@ const Modal = ({
           opacity: show ? '1' : '0',
         }}
       >
-        {children}
-        {buttonContent}
+        {modalContent}
       </div>
-    </>
+    </Aux>
   );
 };
 
@@ -107,6 +151,7 @@ Modal.propTypes = {
   show: PropTypes.string.isRequired,
   cardData: PropTypes.shape({
     price: PropTypes.number,
+    rent1: PropTypes.number,
   }),
   type: PropTypes.string,
   children: PropTypes.string.isRequired,

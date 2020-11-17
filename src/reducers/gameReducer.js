@@ -70,6 +70,8 @@ function buyProperty(state, game) {
   return newState;
 }
 
+const payRent = (state, game) => buyProperty(state, game);
+
 const GameReducer = (state, action) => {
   switch (action.type) {
     case 'START_GAME':
@@ -78,6 +80,8 @@ const GameReducer = (state, action) => {
       return rollDice(state);
     case 'BUY':
       return buyProperty(state, action.game);
+    case 'PAY_RENT':
+      return payRent(state, action.game);
     default:
       return state;
   }
