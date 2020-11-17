@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { GameContext } from '../../../contexts/context';
 import Backdrop from '../Backdrop/Backdrop';
-// import PropTypes from 'prop-types';
 
 import './Modal.css';
 
@@ -54,7 +54,8 @@ const Modal = ({
     buttonContent = (
       <>
         <h1>
-          {'$'}{cardData.price}
+          {'$'}
+          {cardData.price}
         </h1>
         <button type="button" className="" onClick={handleBuy}>
           Buy
@@ -83,15 +84,19 @@ const Modal = ({
   );
 };
 
-// Modal.defaultProps = {
-//   name: 'Stranger'
-// };
+Modal.defaultProps = {
+  cardData: {},
+  type: 'property',
+};
 
-// Modal.propTypes = {
-//   show: PropTypes.string.isRequired,
-//   cardData[price]: PropTypes.number.isRequired,
-//   type: PropTypes.string,
-//   children: PropTypes.string
-// };
+Modal.propTypes = {
+  show: PropTypes.string.isRequired,
+  cardData: PropTypes.shape({
+    price: PropTypes.number,
+  }),
+  type: PropTypes.string,
+  children: PropTypes.string.isRequired,
+  modalClosed: PropTypes.func.isRequired,
+};
 
 export default Modal;
