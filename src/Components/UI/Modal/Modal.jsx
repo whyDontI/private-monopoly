@@ -12,10 +12,14 @@ const Modal = ({
   const { gameState, dispatch } = useContext(GameContext);
 
   let isCardPurchased = false;
+  let receiverName = '';
+  let cardPurchasedByPlayerIndex = -1;
 
-  const cardPurchasedByPlayerIndex = gameState.cardsPurchasedBy.findIndex(
-    (element) => element.cardIndex === index,
-  );
+  if (gameState.cardsPurchasedBy.length > 0) {
+    cardPurchasedByPlayerIndex = gameState.cardsPurchasedBy.findIndex(
+      (element) => element.cardIndex === index,
+    );
+  }
 
   const handleBuy = () => {
     const oldPlayerData = gameState[gameState.currentPlayerName];
@@ -79,41 +83,42 @@ const Modal = ({
 
   if (type === 'chance' || type === 'community') {
     modalContent = (
-      <Aux>
+      <div className="Modal_Content">
         {children}
-        <button type="button" className="" onClick={handlePass}>
-          End Turn
-        </button>
-      </Aux>
+        <div classNam="Modal_buttons">
+          <button type="button" className="" onClick={handlePass}>
+            End Turn
+          </button>
+        </div>
+      </div>
     );
   } else {
     modalContent = (
-      <Aux>
-        {children}
+      <div className="Modal_Content">
         <h1>
           $
           {cardData.price}
         </h1>
-        <button type="button" className="" onClick={handleBuy}>
-          Buy
-        </button>
-        <button type="button" className="" onClick={handlePass}>
-          Pass
-        </button>
-      </Aux>
+        <div className="Modal_buttons">
+          <button type="button" className="" onClick={handleBuy}>
+            Buy
+          </button>
+          <button type="button" className="" onClick={handlePass}>
+            Pass
+          </button>
+        </div>
+      </div>
     );
   }
 
-  const receiverName = gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer;
-
   if (cardPurchasedByPlayerIndex !== -1 && receiverName !== gameState.currentPlayerName) {
+    receiverName = gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer;
     isCardPurchased = true;
   }
 
   if (isCardPurchased) {
     modalContent = (
-      <Aux>
-        {children}
+      <div className="Modal_Content">
         <p>
           you have to pay
           {cardData.rent1}
@@ -121,8 +126,10 @@ const Modal = ({
           to
           {gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer}
         </p>
-        <button type="button" onClick={payRent}>Pay</button>
-      </Aux>
+        <div classNam="Modal_buttons">
+          <button type="button" onClick={payRent}>Pay</button>
+        </div>
+      </div>
     );
   }
 
