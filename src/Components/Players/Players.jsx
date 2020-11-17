@@ -13,9 +13,7 @@ const Players = () => {
             <p id="player-1__price">{`$${gameState.player1.balance}`}</p>
           </div>
         </div>
-      ) : (
-          ''
-        )}
+      ) : ('')}
       {gameState.player2.playing ? (
         <div className="player-2">
           <div className="player-game__details">
@@ -23,9 +21,7 @@ const Players = () => {
             <p id="player-2__price">{`$${gameState.player2.balance}`}</p>
           </div>
         </div>
-      ) : (
-          ''
-        )}
+      ) : ('')}
       {gameState.player3.playing ? (
         <div className="player-3">
           <div className="player-game__details">
@@ -33,9 +29,7 @@ const Players = () => {
             <p id="player-3__price">{`$${gameState.player3.balance}`}</p>
           </div>
         </div>
-      ) : (
-          ''
-        )}
+      ) : ('')}
       {gameState.player4.playing ? (
         <div className="player-4">
           <div className="player-game__details">
@@ -43,9 +37,7 @@ const Players = () => {
             <p id="player-4__price">{`$${gameState.player4.balance}`}</p>
           </div>
         </div>
-      ) : (
-          ''
-        )}
+      ) : ('')}
     </div>
   );
 };
