@@ -6,7 +6,7 @@ import Backdrop from '../Backdrop/Backdrop';
 import './Modal.css';
 
 const Modal = ({
-  show, modalClosed, cardData, type, children,
+  show, modalClosed, cardData, type, children, index,
 }) => {
   const { gameState, dispatch } = useContext(GameContext);
 
@@ -19,6 +19,10 @@ const Modal = ({
         cardsPurchased: [...oldPlayerData.cardsPurchased, cardData],
         turn: false,
       },
+      cardsPurchasedBy: [
+        ...gameState.cardsPurchasedBy,
+        { cardIndex: index, purchasedByPlayer: gameState.currentPlayerName },
+      ],
     };
     dispatch({
       type: 'BUY',
@@ -67,6 +71,16 @@ const Modal = ({
     );
   }
 
+  let isCardPurchased = false;
+
+  const cardPurchasedByPlayer = gameState.cardsPurchasedBy.findIndex(
+    (element) => element.cardIndex === index,
+  );
+
+  if (cardPurchasedByPlayer !== -1) {
+    isCardPurchased = true;
+  }
+
   return (
     <>
       <Backdrop show={show} clicked={() => { }} />
@@ -97,6 +111,7 @@ Modal.propTypes = {
   type: PropTypes.string,
   children: PropTypes.string.isRequired,
   modalClosed: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default Modal;

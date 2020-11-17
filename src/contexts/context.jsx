@@ -84,6 +84,7 @@ const GameContextProvider = (props) => {
     currentPlayerNumber: 1,
     currentPlayerName: 'player1',
     numberOfPlayers: 2,
+    cardsPurchasedBy: [],
   });
 
   const { children } = props;

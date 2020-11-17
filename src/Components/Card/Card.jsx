@@ -67,6 +67,7 @@ const Card = ({
           cardData={gameBlocks[index - 1]}
           color={color}
           type={type}
+          index={index}
         >
           {modalContent}
         </Modal>
