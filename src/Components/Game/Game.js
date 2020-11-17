@@ -1,12 +1,14 @@
 import Card from "../Card/Card";
 import Dice from "../Bank/Dice/Dice";
-import Chance from "../Card/Chance/Chance";
-import Community from "../Card/Community/Community";
+import Players from "../Players/Players";
+import FreeParkingIcon from "../../assets/free_parking_icon.png";
+import JakeIcon from "../../assets/jake_icon.png";
 import "./Game.css";
 
 function Game() {
   return (
     <div className='table'>
+      <Players />
       <div className='board'>
         <div className='center'>
           <div className='community-chest-deck'>
@@ -27,7 +29,7 @@ function Game() {
           <div className='container'>
             <div className='instructions'>
               Collect $200.00 salary as you pass
-                </div>
+            </div>
             <div className='go-word'>go</div>
           </div>
           <div className='arrow fa fa-long-arrow-left'></div>
@@ -49,7 +51,7 @@ function Game() {
             type='property'
           />
           {/* Index 8 */}
-          <Chance index={8} />
+          <Card index={8} type='chance' />
           <Card
             name='Oriental Avenue'
             index={7}
@@ -62,7 +64,7 @@ function Game() {
             index={6}
             pricetext='$200'
             color=''
-            type='property'
+            type='railroad'
           />
 
           {/* Index 5 */}
@@ -72,11 +74,11 @@ function Game() {
               <div className='diamond'></div>
               <div className='instructions'>
                 Pay 10%
-                    <br />
-                    or
-                    <br />
-                    $200
-                  </div>
+                <br />
+                or
+                <br />
+                $200
+              </div>
             </div>
           </div>
           <Card
@@ -87,7 +89,7 @@ function Game() {
             type='property'
           />
           {/* Index 3 */}
-          <Community index={3} />
+          <Card index={3} type='community' />
           <Card
             name='Mediterranean Avenue'
             index={2}
@@ -142,7 +144,7 @@ function Game() {
           />
 
           {/* Index 18 */}
-          <Community index={18} />
+          <Card index={18} type='community' />
           <Card
             name='St. James Place'
             index={17}
@@ -155,7 +157,7 @@ function Game() {
             index={16}
             pricetext='$200'
             color=''
-            type='property'
+            type='railroad'
           />
 
           <Card
@@ -179,7 +181,7 @@ function Game() {
             index={13}
             pricetext='$150'
             color=''
-            type='property'
+            type='utility electric'
           />
 
           <Card
@@ -195,7 +197,9 @@ function Game() {
         <div className='space corner free-parking'>
           <div className='container'>
             <div className='name'>Free</div>
-            <i className='drawing fa fa-car'></i>
+            <i className='drawing fa fa-car'>
+              <img src={FreeParkingIcon} alt='freeParking' />
+            </i>
             <div className='name'>Parking</div>
           </div>
         </div>
@@ -210,7 +214,7 @@ function Game() {
           />
 
           {/* Index 23 */}
-          <Chance index={23} />
+          <Card index={23} type='chance' />
           <Card
             name='Indiana Avenue'
             index={24}
@@ -230,7 +234,7 @@ function Game() {
             index={26}
             pricetext='$200'
             color=''
-            type='property'
+            type='railroad'
           />
           <Card
             name='Atlantic Avenue'
@@ -253,7 +257,7 @@ function Game() {
             index={29}
             pricetext='$150'
             color=''
-            type='property'
+            type='utility waterworks'
           />
 
           <Card
@@ -269,7 +273,9 @@ function Game() {
         <div className='space corner go-to-jail'>
           <div className='container'>
             <div className='name'>Go To</div>
-            <i className='drawing fa fa-gavel'></i>
+            <i className='drawing fa fa-gavel'>
+              <img src={JakeIcon} alt='goToJail' />
+            </i>
             <div className='name'>Jail</div>
           </div>
         </div>
@@ -291,10 +297,10 @@ function Game() {
           />
 
           {/* Index 34 */}
-          <Community index={34} />
+          <Card index={34} type='community' />
 
           <Card
-            name='Pennsylvania Railroad'
+            name='Pennsylvania Avenue'
             index={35}
             pricetext='$200'
             color='green'
@@ -309,7 +315,7 @@ function Game() {
           />
 
           {/* Index 37 */}
-          <Chance index={37} />
+          <Card index={37} type='chance' />
 
           <Card
             name='Park Place'

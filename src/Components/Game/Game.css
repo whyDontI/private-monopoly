@@ -174,6 +174,10 @@
 	padding-bottom: 40px;
 }
 
+.utility .name {
+    padding-top:10px;
+}
+
 .left-row .container {
 	transform: translate(-50%, -50%) rotate(90deg);
 	left: 50%;
