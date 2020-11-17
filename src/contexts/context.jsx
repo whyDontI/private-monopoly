@@ -97,7 +97,7 @@ const GameContextProvider = (props) => {
 };
 
 GameContextProvider.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default GameContextProvider;

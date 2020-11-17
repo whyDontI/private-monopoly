@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Aux from '../../../hoc/Aux/Aux';
 import { GameContext } from '../../../contexts/context';
+import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
 
 import './Modal.css';
 
 const Modal = ({
-  show, modalClosed, cardData, type, children, index,
+  show, modalClosed, cardData, type, children, color, index, cardIcon,
 }) => {
   const { gameState, dispatch } = useContext(GameContext);
 
@@ -85,7 +85,7 @@ const Modal = ({
     modalContent = (
       <div className="Modal_Content">
         {children}
-        <div classNam="Modal_buttons">
+        <div className="Modal_buttons">
           <button type="button" className="" onClick={handlePass}>
             End Turn
           </button>
@@ -95,7 +95,19 @@ const Modal = ({
   } else {
     modalContent = (
       <div className="Modal_Content">
+        {color && (
+          <div className={['Modal_color_header', color].join(' ')} />
+        )}
+        <div className="cardPreview">
+          {cardIcon && (
+            <i>
+              <img src={cardIcon} alt={type} />
+            </i>
+          )}
+        </div>
         <h1>
+          {cardData.name}
+          <br />
           $
           {cardData.price}
         </h1>
@@ -117,6 +129,9 @@ const Modal = ({
   }
 
   if (isCardPurchased) {
+    const propertyOwenerName = gameState[
+      gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer
+    ].name;
     modalContent = (
       <div className="Modal_Content">
         <p>
@@ -124,9 +139,10 @@ const Modal = ({
           {cardData.rent1}
           {' '}
           to
-          {gameState.cardsPurchasedBy[cardPurchasedByPlayerIndex].purchasedByPlayer}
+          {' '}
+          {propertyOwenerName}
         </p>
-        <div classNam="Modal_buttons">
+        <div className="Modal_buttons">
           <button type="button" onClick={payRent}>Pay</button>
         </div>
       </div>
@@ -150,20 +166,27 @@ const Modal = ({
 };
 
 Modal.defaultProps = {
-  cardData: {},
+  color: null,
+  cardData: {
+    price: 0,
+  },
   type: 'property',
+  cardIcon: null,
 };
 
 Modal.propTypes = {
-  show: PropTypes.string.isRequired,
+  show: PropTypes.bool.isRequired,
   cardData: PropTypes.shape({
+    name: PropTypes.string,
     price: PropTypes.number,
     rent1: PropTypes.number,
   }),
+  color: PropTypes.string,
   type: PropTypes.string,
   children: PropTypes.string.isRequired,
   modalClosed: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
+  cardIcon: PropTypes.string,
 };
 
 export default Modal;

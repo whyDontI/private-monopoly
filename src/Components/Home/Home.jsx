@@ -35,8 +35,9 @@ const Home = () => {
                 numberOfPlayers: e.target.value,
               });
             }}
+            value={2}
           >
-            <option selected>2</option>
+            <option>2</option>
             <option>3</option>
             <option>4</option>
           </select>

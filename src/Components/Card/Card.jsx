@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../UI/Modal/Modal';
 import Aux from '../../hoc/Aux/Aux';
 import { GameContext } from '../../contexts/context';
-import Icon from '../../assets/train_icon.png';
+import RailRoadIcon from '../../assets/train_icon.png';
 import ElectricIcon from '../../assets/electric_icon.png';
 import WaterIcon from '../../assets/water_icon.png';
 import ChanceIcon from '../../assets/chance_icon.png';
@@ -37,6 +37,38 @@ const Card = ({
     setShowModal(false);
   };
 
+  const getModalContent = () => {
+    const randomChanceIndex = Math.floor(Math.random() * 16) + 1;
+    const randomCommunityIndex = Math.floor(Math.random() * 16) + 1;
+    let content;
+    if (type === 'chance') {
+      content = chanceCards[randomChanceIndex - 1];
+    } else if (type === 'community') {
+      content = communityCards[randomCommunityIndex - 1];
+    } else {
+      content = '';
+    }
+
+    return content;
+  };
+
+  const getCardIcon = (cardType) => {
+    switch (cardType) {
+      case 'railroad':
+        return RailRoadIcon;
+      case 'utility electric':
+        return ElectricIcon;
+      case 'utility waterworks':
+        return WaterIcon;
+      case 'chance':
+        return ChanceIcon;
+      case 'community':
+        return CommunityIcon;
+      default:
+        return null;
+    }
+  };
+
   useEffect(() => {
     if (playerOnCard()) {
       setShowModal(true);
@@ -47,17 +79,8 @@ const Card = ({
     };
   }, [gameState.diceRolledFlag]);
 
-  const randomChanceIndex = Math.floor(Math.random() * 16) + 1;
-  const randomCommunityIndex = Math.floor(Math.random() * 16) + 1;
-  let modalContent = '';
-
-  if (type === 'chance') {
-    modalContent = chanceCards[randomChanceIndex - 1];
-  } else if (type === 'community') {
-    modalContent = communityCards[randomCommunityIndex - 1];
-  } else {
-    modalContent = '';
-  }
+  const modalContent = getModalContent();
+  const cardIcon = getCardIcon(type);
 
   return (
     <Aux>
@@ -69,6 +92,7 @@ const Card = ({
           color={color}
           type={type}
           index={index}
+          cardIcon={cardIcon}
         >
           {modalContent}
         </Modal>
@@ -79,31 +103,11 @@ const Card = ({
             <div className={['color-bar', color].join(' ')} />
           )}
           <div className="name">{name}</div>
-          {type === 'railroad' ? (
+          {cardIcon && (
             <i>
-              <img src={Icon} alt="railroad" />
+              <img src={cardIcon} alt={type} />
             </i>
-          ) : null}
-          {type === 'utility electric' ? (
-            <i>
-              <img src={ElectricIcon} alt="electric" />
-            </i>
-          ) : null}
-          {type === 'utility waterworks' ? (
-            <i>
-              <img src={WaterIcon} alt="waterWorks" />
-            </i>
-          ) : null}
-          {type === 'chance' ? (
-            <i>
-              <img src={ChanceIcon} alt="chance" />
-            </i>
-          ) : null}
-          {type === 'community' ? (
-            <i>
-              <img src={CommunityIcon} alt="community" />
-            </i>
-          ) : null}
+          )}
           {pricetext !== '' && <div className="price">{pricetext}</div>}
 
           <div className="playerContainer">
@@ -127,10 +131,11 @@ const Card = ({
 };
 
 Card.defaultProps = {
+  color: '',
 };
 
 Card.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   type: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
 };
