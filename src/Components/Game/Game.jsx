@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../Card/Card';
-import CornerCard from '../CornerCard/CornerCard';
 import Dice from '../Bank/Dice/Dice';
 import Players from '../Players/Players';
 import FreeParkingIcon from '../../assets/free_parking_icon.png';
@@ -26,8 +25,16 @@ function Game() {
             <div className="deck" />
           </div>
         </div>
-
-        <CornerCard index={1} classes="go" />
+        {/* index 1 */}
+        <div className="space corner go">
+          <div className="container">
+            <div className="instructions">
+              Collect $200.00 salary as you pass
+            </div>
+            <div className="go-word">go</div>
+          </div>
+          <div className="arrow fa fa-long-arrow-left" />
+        </div>
 
         <div className="row horizontal-row bottom-row">
           <Card
@@ -94,24 +101,22 @@ function Game() {
         </div>
 
         {/* Index 11 */}
-        <CornerCard index={11}>
-          {/* <div className="space corner jail">
-            <div className="just">Just</div>
-            <div className="drawing">
-              <div className="container">
-                <div className="name">In</div>
-                <div className="window">
-                  <div className="bar" />
-                  <div className="bar" />
-                  <div className="bar" />
-                  <i className="person fa fa-frown-o" />
-                </div>
-                <div className="name">Jail</div>
+        <div className="space corner jail">
+          <div className="just">Just</div>
+          <div className="drawing">
+            <div className="container">
+              <div className="name">In</div>
+              <div className="window">
+                <div className="bar" />
+                <div className="bar" />
+                <div className="bar" />
+                <i className="person fa fa-frown-o" />
               </div>
+              <div className="name">Jail</div>
             </div>
-            <div className="visiting">Visiting</div>
-          </div> */}
-        </CornerCard>
+          </div>
+          <div className="visiting">Visiting</div>
+        </div>
 
         <div className="row vertical-row left-row">
           {/* <Card name="City Tax" pricetext="Pay $200" color="" type="chance" />
