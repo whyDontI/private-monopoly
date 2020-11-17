@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import { GameReducer } from '../reducers/gameReducer'
+import GameReducer from '../reducers/gameReducer';
 
 export const GameContext = createContext();
 
@@ -18,7 +18,7 @@ const GameContextProvider = (props) => {
         'light-blue': 0,
         'dark-blue': 0,
         railroads: 0,
-        utilities: 0
+        utilities: 0,
       },
       cardsPurchased: [],
       currentIndex: 1,
@@ -36,7 +36,7 @@ const GameContextProvider = (props) => {
         lightBlue: 0,
         darkBlue: 0,
         railRoads: 0,
-        utilities: 0
+        utilities: 0,
       },
       cardsPurchased: [],
       currentIndex: 1,
@@ -54,7 +54,7 @@ const GameContextProvider = (props) => {
         lightBlue: 0,
         darkBlue: 0,
         railRoads: 0,
-        utilities: 0
+        utilities: 0,
       },
       cardsPurchased: [],
       currentIndex: 1,
@@ -72,7 +72,7 @@ const GameContextProvider = (props) => {
         lightBlue: 0,
         darkBlue: 0,
         railRoads: 0,
-        utilities: 0
+        utilities: 0,
       },
       cardsPurchased: [],
       currentIndex: 1,
@@ -82,14 +82,16 @@ const GameContextProvider = (props) => {
     diceRolledFlag: true,
     currentPlayerNumber: 1,
     currentPlayerName: 'player1',
-    numberOfPlayers: 2
+    numberOfPlayers: 2,
   });
+
+  const { children } = props;
 
   return (
     <GameContext.Provider value={{ gameState, dispatch }}>
-      {props.children}
+      {children}
     </GameContext.Provider>
   );
-}
+};
 
 export default GameContextProvider;

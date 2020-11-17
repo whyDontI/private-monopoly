@@ -62,7 +62,7 @@ const Modal = ({ show, modalClosed, cardData, type, children }) => {
 
   return (
     <>
-      <Backdrop show={show} clicked={() => {}} />
+      <Backdrop show={show} clicked={() => { }} />
       <div
         className='Modal'
         style={{
